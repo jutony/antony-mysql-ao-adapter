@@ -22,8 +22,9 @@ class BasicConstants():
     ACTIVITY_3_NAME = 'run_script'
     ACTIVITY_1_URL = '/api/v2/get_template/'
     ACTIVITY_2_URL = '/api/v2/create_template/'
-    #TARGET_NAME = 'endpoint'
-    TARGET_NAME = 'mysql_target'
+    # TARGET_NAME = 'endpoint'
+    # TARGET_NAME = 'mysql_target'
+    TARGET_NAME = 'antonyu_target_mysql_target'
     SELECT_NAME = 'antonyu_select_from_mysql_table' # 'select_from_mysql_table' in the lab manual
     SELECT_TYPE = ACTIVITY + '.' + SELECT_NAME
     ACTIVITY_1_TYPE = ACTIVITY + '.' + ACTIVITY_1_NAME
