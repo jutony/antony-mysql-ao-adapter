@@ -7,10 +7,10 @@ import pymysql.cursors
 class MySQLTarget():
     """Class representing the adapter target. """
 
-    #PROTOCOL = "protocol"
+    # PROTOCOL = "protocol"
     HOST = "host"
-    #PORT = "port"
-    #DISABLE_SSL = "disable_certificate_validation"
+    # PORT = "port"
+    # DISABLE_SSL = "disable_certificate_validation"
     CHARSET = "charset"
     DB = "db"
 

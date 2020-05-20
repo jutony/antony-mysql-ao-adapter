@@ -32,7 +32,7 @@ RUN /usr/bin/openssl req -x509 -newkey rsa:2048 -nodes -keyout /secrets/ssl/cert
                          -days 365 \
                          -subj "/C=US/ST=Texas/L=Austin/O=Cisco/OU=longhorn/CN=python" \
  && python setup.py bdist_wheel \
- && mv ./dist/ad_mysql_antonyu-1.0-py2.py3-none-any.whl /wheels
+ && mv ./dist/ad_mysql_antony-1.0-py2.py3-none-any.whl /wheels
 ## && mv ./dist/template_adapter-1.0-py2.py3-none-any.whl /wheels
 
 
@@ -62,7 +62,7 @@ COPY --from=builder /wheels /wheels
 RUN apk add --no-cache bash \
  && echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories \
  && apk add --no-cache shadow \
- && pip install /wheels/ad_mysql_antonyu-1.0-py2.py3-none-any.whl -f /wheels \
+ && pip install /wheels/ad_mysql_antony-1.0-py2.py3-none-any.whl -f /wheels \
 # && /root/setup_jail.sh \
 # && rm -f /root/setup_jail.sh \
  && rm -rf /wheels \
