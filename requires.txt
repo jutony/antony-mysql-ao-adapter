@@ -1,5 +1,5 @@
 python-dotenv
 six
-responses
+pymysql
 requests
 pyyaml

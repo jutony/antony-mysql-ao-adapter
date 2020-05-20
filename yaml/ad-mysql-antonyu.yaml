@@ -2,46 +2,46 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-adapter
+  name: ad-mysql-antonyu
   labels:
-    name: demo-adapter
+    name: ad-mysql-antonyu
 spec:
   type: ClusterIP
   ports:
   - name: python-svc-port
     port: 8082
-    targetPort: demo-adapter
+    targetPort: ad-mysql-antonyu
     protocol: TCP
   selector:
     # This needs to match the selector in the Deployment
-    app: demo-adapter
+    app: ad-mysql-antonyu
 
 ---
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: demo-adapter-tls
+  name: ad-mysql-antonyu-tls
 spec:
-  secretName: demo-adapter-tls
+  secretName: ad-mysql-antonyu-tls
   issuerRef:
     name: ca-issuer
     kind: Issuer
-  commonName: demo-adapter
+  commonName: ad-mysql-antonyu
   dnsNames:
-  - demo-adapter
+  - ad-mysql-antonyu
 
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: demo-adapter
+  name: action-orchestrator-ad-mysql-antonyu
   labels:
-    app: demo-adapter
+    app: ad-mysql-antonyu
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-adapter
+      app: ad-mysql-antonyu
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -49,31 +49,31 @@ spec:
       maxSurge: 1
   template:
     metadata:
-      name: demo-adapter
+      name: ad-mysql-antonyu
       labels:
-        app: demo-adapter
+        app: ad-mysql-antonyu
     spec:
       containers:
-      - name: demo-adapter
-        image: demo-adapter:latest
+      - name: ad-mysql-antonyu
+        image: flatiox/ad-mysql-antonyu:latest
         ports:
-        - name: demo-adapter
+        - name: ad-mysql-antonyu
           containerPort: 8082
           protocol: TCP
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         securityContext:
           privileged: false
         volumeMounts:
-            - name: demo-adapter-tls
+            - name: ad-mysql-antonyu-tls
               mountPath: /secrets/ssl/cert
               readOnly: true
             - name: ca-key-pair
               mountPath: /secrets/ssl/ca
               readOnly: true
       volumes:
-        - name: demo-adapter-tls
+        - name: ad-mysql-antonyu-tls
           secret:
-            secretName: demo-adapter-tls
+            secretName: ad-mysql-antonyu-tls
             items:
               - key: tls.crt
                 path: certificate.pem
